@@ -25,7 +25,7 @@ class BasePage:
             EC.presence_of_element_located(locator)
         )
 
-    def element_is_presents(self, locator, timeout=5):  # селениум видит элементы в дом д
+    def elements_is_present(self, locator, timeout=5):  # селениум видит элементы в дом д
         return wait(self.driver, timeout).until(
             EC.presence_of_all_elements_located(locator)
         )
@@ -41,4 +41,4 @@ class BasePage:
         )
 
     def go_to_element(self, element):
-        self.driver.execute_script("argument[0].scrollIntoView();", element)
+        self.driver.execute_script("arguments[0].scrollIntoView();", element)
