@@ -25,7 +25,7 @@ class BasePage:
             EC.presence_of_element_located(locator)
         )
 
-    def elements_is_present(self, locator, timeout=5):  # селениум видит элементы в дом д
+    def elements_are_present(self, locator, timeout=5):  # селениум видит элементы в дом д
         return wait(self.driver, timeout).until(
             EC.presence_of_all_elements_located(locator)
         )
