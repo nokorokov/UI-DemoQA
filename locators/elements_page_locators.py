@@ -31,7 +31,7 @@ class RadioButtonPageLocators:
 
 
 class WebTablePageLocators:
-    #add person
+    # add person
     ADD_BUTTON = (By.CSS_SELECTOR, 'button[id="addNewRecordButton"]')
     FIRSTNAME_INPUT = (By.CSS_SELECTOR, 'input[id="firstName"]')
     LASTNAME_INPUT = (By.CSS_SELECTOR, 'input[id="lastName"]')
@@ -41,8 +41,20 @@ class WebTablePageLocators:
     DEPARTMENT_INPUT = (By.CSS_SELECTOR, 'input[id="department"]')
     SUBMIT_BUTTON = (By.CSS_SELECTOR, 'button[id="submit"]')
 
-    #table
+    # table
     FULL_PEOPLE_LIST = (By.CSS_SELECTOR, 'div[class="rt-tr-group"]')
     SEARCH_INPUT = (By.CSS_SELECTOR, 'input[id="searchBox"]')
     DELETE_BUTTON = (By.CSS_SELECTOR, 'span[title="Delete"]')
     ROW_PARENT = './/ancestor::div[@class="rt-tr-group"]'
+    NO_ROWS_FOUND = (By.CSS_SELECTOR, 'div[class="rt-noData"]')
+    COUNT_ROW_LIST = (By.CSS_SELECTOR, 'select[aria-label="rows per page"]')
+
+    # update
+    UPDATE_BUTTON = (By.CSS_SELECTOR, 'span[title="Edit"]')
+    UPDATE_FIRSTNAME_INPUT = (By.CSS_SELECTOR, 'input[id="firstName"]')
+    UPDATE_LASTNAME_INPUT = (By.CSS_SELECTOR, 'input[id="lastName"]')
+    UPDATE_EMAIL_INPUT = (By.CSS_SELECTOR, 'input[id="userEmail"]')
+    UPDATE_AGE_INPUT = (By.CSS_SELECTOR, 'input[id="age"]')
+    UPDATE_SALARY_INPUT = (By.CSS_SELECTOR, 'input[id="salary"]')
+    UPDATE_DEPARTMENT_INPUT = (By.CSS_SELECTOR, 'input[id="department"]')
+    UPDATE_SUBMIT_BUTTON = (By.CSS_SELECTOR, 'button[id="submit"]')
