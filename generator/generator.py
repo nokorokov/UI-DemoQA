@@ -18,5 +18,13 @@ def generated_person():
         email=faker_ru.email(),
         current_address=faker_ru.address(),
         permanent_address=faker_ru.address()
-
     )
+
+
+def generated_file():
+    path = rf'C:\Users\Nik\PycharmProjects\artLessons\filetest{random.randint(0, 99)}.txt'
+    file = open(path, "w+")
+    file.write(f'It`s random text for file, {random.randint(0, 99)}')
+    file.close()
+    return file.name, path
+
