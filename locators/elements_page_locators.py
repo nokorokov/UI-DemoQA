@@ -58,3 +58,12 @@ class WebTablePageLocators:
     UPDATE_SALARY_INPUT = (By.CSS_SELECTOR, 'input[id="salary"]')
     UPDATE_DEPARTMENT_INPUT = (By.CSS_SELECTOR, 'input[id="department"]')
     UPDATE_SUBMIT_BUTTON = (By.CSS_SELECTOR, 'button[id="submit"]')
+
+
+class ButtonPageLocators:
+    DOUBLE_CLICK_BUTTON = (By.CSS_SELECTOR, 'button[id="doubleClickBtn"]')
+    RIGHT_CLICK_BUTTON = (By.CSS_SELECTOR, 'button[id="rightClickBtn"]')
+    CLICK_ME_BUTTON = (By.XPATH, '//button[text()="Click Me"]')
+    RESULT_DOUBLE_CLICK = (By.CSS_SELECTOR, 'p[id="doubleClickMessage"]')
+    RESULT_RIGHT_CLICK = (By.CSS_SELECTOR, 'p[id="rightClickMessage"]')
+    RESULT_CLICK_ME = (By.CSS_SELECTOR, 'p[id="dynamicClickMessage"]')
