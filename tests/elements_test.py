@@ -1,6 +1,6 @@
 import random
 from conftest import driver
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonPage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonPage, LinksPage
 
 
 class TestElements:
@@ -93,3 +93,35 @@ class TestElements:
             assert double == 'You have done a double click', 'The double click button was not pressed'
             assert right == 'You have done a right click', 'The right click button was not pressed'
             assert click == 'You have done a dynamic click', 'The dynamic click button was not pressed'
+
+    class TestLinksPage:
+
+        def test_check_link(self, driver):
+            links_page = LinksPage(driver, 'https://demoqa.com/links')
+            links_page.open()
+            href_link, current_url = links_page.check_new_tab_simple_link()
+            assert href_link == current_url, 'the link is broken or url is incorrect'
+
+        def test_check_broken_link(self, driver):
+            links_page = LinksPage(driver, 'https://demoqa.com/links')
+            links_page.open()
+            response_code = links_page.check_broken_link('https://demoqa.com/bad-request')
+            assert response_code == 400, 'the link works or the status code not 400'
+
+        def test_check_unauthorized_link(self, driver):
+            links_page = LinksPage(driver, 'https://demoqa.com/links')
+            links_page.open()
+            response_code = links_page.check_unauthorized_link('https://demoqa.com/unauthorized')
+            assert response_code == 401, 'the link works or the status code not 401'
+
+        def test_check_forbidden_link(self, driver):
+            links_page = LinksPage(driver, 'https://demoqa.com/links')
+            links_page.open()
+            response_code = links_page.check_forbidden_link('https://demoqa.com/forbidden')
+            assert response_code == 403, 'the link works or the status code not 403'
+
+        def test_check_invalid_url_link(self, driver):
+            links_page = LinksPage(driver, 'https://demoqa.com/links')
+            links_page.open()
+            response_code = links_page.check_invalid_url_link('https://demoqa.com/invalid-url')
+            assert response_code == 404, 'the link works or the status code not 404'
