@@ -1,5 +1,5 @@
 import random
-
+from pathlib import Path
 from data.data import Person
 from faker import Faker
 
@@ -12,6 +12,7 @@ def generated_person():
         firstname=faker_ru.first_name(),
         lastname=faker_ru.last_name(),
         full_name=faker_ru.first_name() + " " + faker_ru.last_name() + " " + faker_ru.middle_name(),
+        mobile=faker_ru.msisdn(),
         age=random.randint(10, 80),
         department=faker_ru.job(),
         salary=random.randint(10000, 20000),
@@ -21,10 +22,20 @@ def generated_person():
     )
 
 
-def generated_file():
-    path = rf'C:\Users\Nik\PycharmProjects\artLessons\filetest{random.randint(0, 99)}.txt'
-    file = open(path, "w+")
-    file.write(f'It`s random text for file, {random.randint(0, 99)}')
-    file.close()
-    return file.name, path
+# def generated_file():
+#     path = rf'C:\Users\Nik\PycharmProjects\artLessons\filetest{random.randint(0, 99)}.jpeg'
+#     file = open(path, "w+")
+#     file.write(f'It`s random text for file, {random.randint(0, 99)}')
+#     file.close()
+#     return file.name, path
 
+def generated_file():
+    project_root = Path(__file__).parent.parent.resolve()
+
+    filename = f'filetest{random.randint(0, 99)}.txt'
+    path = project_root / filename
+
+    with path.open("w+") as file:
+        file.write(f'It`s random text for file, {random.randint(0, 99)}')
+
+    return filename, path
