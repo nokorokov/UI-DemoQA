@@ -58,3 +58,5 @@ class BasePage:
         self.driver.execute_script("document.getElementsByTagName('footer')[0].remove();")
         self.driver.execute_script("document.getElementById('close-fixedban').remove();")
 
+    def switch_window(self):
+        self.driver.switch_to.window(self.driver.window_handles[1])
