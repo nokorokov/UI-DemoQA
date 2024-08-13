@@ -60,3 +60,7 @@ class BasePage:
 
     def switch_window(self):
         self.driver.switch_to.window(self.driver.window_handles[1])
+
+    def switch_alert(self):
+        var = self.driver.switch_to.alert
+        return var
