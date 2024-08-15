@@ -112,10 +112,3 @@ class ModalDialogsPage(BasePage):
         body_large_text = self.element_is_visible(self.locators.TEXT_LARGE_DIALOG).text
 
         return [title_small, len(body_small_text)], [title_large, len(body_large_text)]
-
-
-    def check_small_modal_dialog(self):
-        pass
-
-    def check_large_modal_dialog(self):
-        pass
