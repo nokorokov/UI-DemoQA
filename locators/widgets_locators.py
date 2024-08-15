@@ -9,4 +9,5 @@ class AccordianPageLocators:
     TEXT_SECOND_SECTION = (By.CSS_SELECTOR, 'div[id="section2Content"] p')
 
     THIRD_SECTION = (By.CSS_SELECTOR, 'div[id="section3Heading"]')
-    TEXT_THIRD_SECTION = (By.CSS_SELECTOR, 'div[id="section3Content"] p')
+    TEXT_THIRD_SECTION = (By.CSS_SELECTOR, 'div[id="section3Content"] p'
+                          )

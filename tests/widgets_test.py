@@ -15,3 +15,4 @@ class TestWidgets:
             assert first_title == 'What is Lorem Ipsum?' and first_content > 0, ''
             assert second_title == 'Where does it come from?' and second_content > 0, ''
             assert third_title == 'Why do we use it?' and third_content > 0, ''
+

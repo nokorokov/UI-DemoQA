@@ -29,3 +29,4 @@ class AccordianPage(BasePage):
             self.go_to_element(self.element_is_present(accordian[accordian_num]['content']))
             section_content = self.element_is_visible(accordian[accordian_num]['content']).text
         return [section_title.text, len(section_content)]
+
