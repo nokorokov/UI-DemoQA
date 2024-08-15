@@ -5,7 +5,7 @@ from selenium.common import UnexpectedAlertPresentException
 
 from pages.base_page import BasePage
 from locators.alerts_frame_windows_locators import (BrowserWindowsPageLocators, AlertsPageLocators, FramesPageLocators,
-                                                    NestedFramesPageLocators)
+                                                    NestedFramesPageLocators, ModalDialogsPageLocators)
 
 
 class BrowserWindowsPage(BasePage):
@@ -84,6 +84,7 @@ class FramesPage(BasePage):
             self.driver.switch_to.default_content()
             return [width, height, text]
 
+
 class NestedFramesPage(BasePage):
     locators = NestedFramesPageLocators()
 
@@ -97,4 +98,24 @@ class NestedFramesPage(BasePage):
         return parent_text, child_text
 
 
+class ModalDialogsPage(BasePage):
+    locators = ModalDialogsPageLocators()
 
+    def check_modal_dialogs(self):
+        self.element_is_visible(self.locators.SMALL_MODAL_BUTTON).click()
+        title_small = self.element_is_visible(self.locators.TITLE_SMALL_MODAL).text
+        body_small_text = self.element_is_visible(self.locators.TEXT_SMALL_DIALOG).text
+        self.element_is_visible(self.locators.CLOSE_SMALL_MODAL_BUTTON).click()
+
+        self.element_is_visible(self.locators.LARGE_MODAL_BUTTON).click()
+        title_large = self.element_is_visible(self.locators.TITLE_LARGE_MODAL).text
+        body_large_text = self.element_is_visible(self.locators.TEXT_LARGE_DIALOG).text
+
+        return [title_small, len(body_small_text)], [title_large, len(body_large_text)]
+
+
+    def check_small_modal_dialog(self):
+        pass
+
+    def check_large_modal_dialog(self):
+        pass

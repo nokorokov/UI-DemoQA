@@ -1,7 +1,8 @@
 import time
 
 from conftest import driver
-from pages.alerts_frame_windows_page import (BrowserWindowsPage, AlertsPage, FramesPage, NestedFramesPage)
+from pages.alerts_frame_windows_page import (BrowserWindowsPage, AlertsPage, FramesPage, NestedFramesPage,
+                                             ModalDialogsPage)
 
 
 class TestAlertsFrameWindow:
@@ -59,3 +60,20 @@ class TestAlertsFrameWindow:
             assert parent_text == 'Parent frame', 'Nested frame does not exist'
             assert child_text == 'Child Iframe', 'Nested frame does not exist'
 
+    class TestModalDialogs:
+
+        def test_modal_dialogs(self, driver):
+            modal_dialogs_page = ModalDialogsPage(driver, 'https://demoqa.com/modal-dialogs')
+            modal_dialogs_page.open()
+            small, large = modal_dialogs_page.check_modal_dialogs()
+            assert small[1] < large[1], 'Text from large dialog is less than text from small dialog'
+            assert small[0] == 'Small Modal', 'The header is not "Small Modal"'
+            assert large[0] == 'Large Modal', 'The header is not "Large Modal"'
+
+        def test_small_modal_dialog(self, driver):
+            modal_dialog_page = ModalDialogsPage(driver, 'https://demoqa.com/modal-dialogs')
+            modal_dialog_page.open()
+
+        def test_large_modal_dialog(self, driver):
+            modal_dialog_page = ModalDialogsPage(driver, 'https://demoqa.com/modal-dialogs')
+            modal_dialog_page.open()
