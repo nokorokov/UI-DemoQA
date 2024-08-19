@@ -1,6 +1,6 @@
 import random
 from pathlib import Path
-from data.data import Person
+from data.data import Person, Color
 from faker import Faker
 
 faker_ru = Faker('ru_RU')
@@ -31,11 +31,14 @@ def generated_person():
 
 def generated_file():
     project_root = Path(__file__).parent.parent.resolve()
-
     filename = f'filetest{random.randint(0, 99)}.txt'
     path = project_root / filename
-
     with path.open("w+") as file:
         file.write(f'It`s random text for file, {random.randint(0, 99)}')
-
     return filename, path
+
+
+def generated_color():
+    yield Color(
+        color_name=["Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo", "Magenta", "Aqua"]
+    )
