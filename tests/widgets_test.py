@@ -1,9 +1,9 @@
 from conftest import driver
-from pages.widgets_page import (AccordianPage, AutoCompletePage)
+from pages.widgets_page import (AccordianPage, AutoCompletePage, DatePickerPage)
 
 
 class TestWidgets:
-    class TestAccordian:
+    class TestAccordianPage:
 
         def test_accordian(self, driver):
             accordian_page = AccordianPage(driver, 'https://demoqa.com/accordian')
@@ -15,7 +15,7 @@ class TestWidgets:
             assert second_title == 'Where does it come from?' and second_content > 0, 'Incorrect title or missing text'
             assert third_title == 'Why do we use it?' and third_content > 0, 'Incorrect title or missing text'
 
-    class TestAutoComplete:
+    class TestAutoCompletePage:
 
         def test_fill_multi_autocomplete(self, driver):
             auto_complete_page = AutoCompletePage(driver, 'https://demoqa.com/auto-complete')
@@ -37,3 +37,19 @@ class TestWidgets:
             color = auto_complete_page.fill_single_autocomplete()
             color_result = auto_complete_page.check_color_in_single()
             assert color == color_result, 'the added colors are missing in the input'
+
+    class TestDatePickerPage:
+
+        def test_change_date(self, driver):
+            date_picker_page = DatePickerPage(driver, 'https://demoqa.com/date-picker')
+            date_picker_page.open()
+            value_date_before, value_date_after = date_picker_page.select_date()
+            assert value_date_before != value_date_after, 'date has not been changed'
+
+        def test_change_date_and_time(self, driver):
+            date_picker_page = DatePickerPage(driver, 'https://demoqa.com/date-picker')
+            date_picker_page.open()
+            value_date_before, value_date_after = date_picker_page.select_date_and_time()
+            print(value_date_before)
+            print(value_date_after)
+            assert value_date_before != value_date_after, 'date and time have not been changed'
