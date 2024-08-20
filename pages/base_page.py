@@ -79,3 +79,8 @@ class BasePage:
             if item.text == value:
                 item.click()
                 break
+
+    def action_drag_and_drop_by_offset(self, element, x_coords, y_coords):
+        action = ActionChains(self.driver)
+        action.drag_and_drop_by_offset(element, x_coords, y_coords)
+        action.perform()
