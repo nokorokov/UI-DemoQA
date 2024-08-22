@@ -3,3 +3,8 @@ selenium~=4.23.1
 webdriver-manager~=4.0.2
 Faker~=26.2.0
 requests~=2.32.3
+
+
+# allure start and get report
+# pytest --alluredir=tests/allure_results ./tests/elements_test.py
+# allure serve tests/allure_results
