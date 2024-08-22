@@ -1,10 +1,13 @@
+import allure
 from conftest import driver
 from pages.widgets_page import (AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage,
                                 ToolTipsPage, MenuPage)
 
 
+@allure.suite("Widgets")
 class TestWidgets:
-    class TestAccordianPage:
+    @allure.feature('Accordian')
+    class TestAccordian:
 
         def test_accordian(self, driver):
             accordian_page = AccordianPage(driver, 'https://demoqa.com/accordian')
@@ -16,7 +19,8 @@ class TestWidgets:
             assert second_title == 'Where does it come from?' and second_content > 0, 'Incorrect title or missing text'
             assert third_title == 'Why do we use it?' and third_content > 0, 'Incorrect title or missing text'
 
-    class TestAutoCompletePage:
+    @allure.feature('Auto complete')
+    class TestAutoComplete:
 
         def test_fill_multi_autocomplete(self, driver):
             auto_complete_page = AutoCompletePage(driver, 'https://demoqa.com/auto-complete')
@@ -39,7 +43,8 @@ class TestWidgets:
             color_result = auto_complete_page.check_color_in_single()
             assert color == color_result, 'the added colors are missing in the input'
 
-    class TestDatePickerPage:
+    @allure.feature('Date picker')
+    class TestDatePicker:
 
         def test_change_date(self, driver):
             date_picker_page = DatePickerPage(driver, 'https://demoqa.com/date-picker')
@@ -53,7 +58,8 @@ class TestWidgets:
             value_date_before, value_date_after = date_picker_page.select_date_and_time()
             assert value_date_before != value_date_after, 'date and time have not been changed'
 
-    class TestSliderPage:
+    @allure.feature('Slider')
+    class TestSlider:
 
         def test_slider(self, driver):
             slider_page = SliderPage(driver, 'https://demoqa.com/slider')
@@ -61,7 +67,8 @@ class TestWidgets:
             before, after = slider_page.change_slider_value()
             assert before != after, 'slider value equal or not been change'
 
-    class TestProgressBarPage:
+    @allure.feature('Progress bar')
+    class TestProgressBar:
 
         def test_progress_bar(self, driver):
             progress_bar_page = ProgressBarPage(driver, 'https://demoqa.com/progress-bar')
@@ -69,7 +76,8 @@ class TestWidgets:
             before, after = progress_bar_page.check_progress()
             assert before != after, 'progress bar has not been changed'
 
-    class TestTabsPage:
+    @allure.feature('Tabs')
+    class TestTabs:
 
         def test_tab(self, driver):
             tabs = TabsPage(driver, 'https://demoqa.com/tabs')
@@ -82,7 +90,8 @@ class TestWidgets:
             assert origin_button == 'Origin' and origin_content == 1059, 'the tab was not pressed or text missing'
             assert use_button == 'Use' and use_content == 613, 'the tab was not pressed or text missing'
 
-    class TestToolTipsPage:
+    @allure.feature('Tool tips')
+    class TestToolTips:
 
         def test_tool_tips(self, driver):
             tool_tips_page = ToolTipsPage(driver, 'https://demoqa.com/tool-tips')
@@ -93,13 +102,15 @@ class TestWidgets:
             assert button_text == 'You hovered over the Contrary', 'hover missing or incorrect content'
             assert button_text == 'You hovered over the 1.10.32', 'hover missing or incorrect content'
 
-    class TestMenuPage:
+    @allure.feature('Menu')
+    class TestMenu:
 
+        @allure.title('Check menu items')
         def test_menu_items(self, driver):
             menu_page = MenuPage(driver, 'https://demoqa.com/menu')
             menu_page.open()
             data = menu_page.check_menu()
             assert data == ['Main Item 1', 'Main Item 2', 'Sub Item', 'Sub Item',
-                           'SUB SUB LIST »', 'Sub Sub Item 1', 'Sub Sub Item 2', 'Main Item 3'], ('menu items does not'
-                                                                                                  'exist or have not'
-                                                                                                  'been selected')
+                            'SUB SUB LIST »', 'Sub Sub Item 1', 'Sub Sub Item 2', 'Main Item 3'], ('menu items does not'
+                                                                                                   'exist or have not'
+                                                                                                   'been selected')

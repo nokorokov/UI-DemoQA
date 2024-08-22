@@ -1,6 +1,7 @@
 import random
 import time
 
+import allure
 from selenium.common import UnexpectedAlertPresentException
 
 from pages.base_page import BasePage
@@ -11,11 +12,13 @@ from locators.alerts_frame_windows_locators import (BrowserWindowsPageLocators, 
 class BrowserWindowsPage(BasePage):
     locators = BrowserWindowsPageLocators()
 
+    @allure.step('Check opened new tab or window')
     def check_opened_new_tab_or_window(self):
         buttons = [self.locators.NEW_WINDOW_BUTTON, self.locators.NEW_TAB_BUTTON]
         selected_buttons = random.choice(buttons)
-        self.element_is_visible(selected_buttons).click()
-        self.switch_to_window()
+        with allure.step('click button and switch to window'):
+            self.element_is_visible(selected_buttons).click()
+            self.switch_to_window()
         text_title = self.element_is_present(self.locators.TITLE_NEW_TAB).text
         return text_title
 
@@ -23,11 +26,13 @@ class BrowserWindowsPage(BasePage):
 class AlertsPage(BasePage):
     locators = AlertsPageLocators()
 
+    @allure.step('Click and see alert')
     def check_see_alert(self):
         self.element_is_visible(self.locators.SEE_ALERT_BUTTON).click()
         alert_window = self.switch_to_alert()
         return alert_window.text
 
+    @allure.step('Check appear alert after 5 second and check alert text')
     def check_alert_appear_after_5_sec(self):
         self.element_is_visible(self.locators.APPEAR_AFTER_5_SEC_BUTTON).click()
         time.sleep(5)
@@ -38,6 +43,7 @@ class AlertsPage(BasePage):
             alert_window = self.switch_to_alert()
             return alert_window.text
 
+    @allure.step('Check accept and dismiss alert')
     def check_confirm_box_appear(self):
         self.go_to_element(self.element_is_present(self.locators.CONFIRM_BOX_ALERT_BUTTON))
         self.element_is_visible(self.locators.CONFIRM_BOX_ALERT_BUTTON).click()
@@ -51,6 +57,7 @@ class AlertsPage(BasePage):
         text_result = self.element_is_clickable(self.locators.RESULT_CONFIRM_BOX).text
         return text_result
 
+    @allure.step('Check prompt box appear')
     def check_prompt_box_appear(self):
         text = f'nik{random.randint(0, 999)}'
         self.go_to_element(self.element_is_present(self.locators.PROMPT_BOX_ALERT_BUTTON))
@@ -65,6 +72,7 @@ class AlertsPage(BasePage):
 class FramesPage(BasePage):
     locators = FramesPageLocators()
 
+    @allure.step('Switch and check frame')
     def check_frame(self, frame_num):
         if frame_num == 'frame1':
             frame = self.element_is_present(self.locators.FIRST_FRAME)
@@ -88,6 +96,7 @@ class FramesPage(BasePage):
 class NestedFramesPage(BasePage):
     locators = NestedFramesPageLocators()
 
+    @allure.step('Switch and check nested frame')
     def check_nested_frame(self):
         parent_frame = self.element_is_present(self.locators.PARENT_FRAME)
         self.switch_to_frame(parent_frame)
@@ -101,6 +110,7 @@ class NestedFramesPage(BasePage):
 class ModalDialogsPage(BasePage):
     locators = ModalDialogsPageLocators()
 
+    @allure.step('Check modal dialogs')
     def check_modal_dialogs(self):
         self.element_is_visible(self.locators.SMALL_MODAL_BUTTON).click()
         title_small = self.element_is_visible(self.locators.TITLE_SMALL_MODAL).text
