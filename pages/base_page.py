@@ -2,6 +2,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class BasePage:
@@ -62,9 +63,10 @@ class BasePage:
     def switch_to_window(self):
         self.driver.switch_to.window(self.driver.window_handles[1])
 
-    def switch_to_alert(self):
-        var = self.driver.switch_to.alert
-        return var
+    def switch_to_alert(self, timeout=10):
+        WebDriverWait(self.driver, timeout).until(EC.alert_is_present())
+        alert = self.driver.switch_to.alert
+        return alert
 
     def switch_to_frame(self, frame_locator):
         self.driver.switch_to.frame(frame_locator)

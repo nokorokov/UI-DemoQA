@@ -51,7 +51,7 @@ class TestElements:
             output_no = radio_button_page.output_result()
             assert output_yes == 'Yes', '"Yes" have not been selected'
             assert output_impressive == 'Impressive', '"Impressive" have not been selected'
-            assert output_no == 'No', '"No" have not been selected'
+            assert output_no == 'No', 'Because this radio button disable'
 
     @allure.feature('WebTable')
     class TestWebTable:
@@ -191,7 +191,7 @@ class TestElements:
         def test_appear_button(self, driver):
             dynamic_properties_page = DynamicPropertiesPage(driver, 'https://demoqa.com/dynamic-properties')
             dynamic_properties_page.open()
-            appear = dynamic_properties_page.check_appear_of_button
+            appear = dynamic_properties_page.check_appear_of_button()
             assert appear is True, 'button did not appear after 5 seconds'
 
 

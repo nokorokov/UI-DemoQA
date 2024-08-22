@@ -81,21 +81,26 @@ class ResizablePage(BasePage):
 
     @allure.step('Change size resizable box')
     def change_size_resizable_box(self):
-        self.action_drag_and_drop_by_offset(self.element_is_present(self.locators.RESIZABLE_BOX_HANDLE),
-                                            400, 200)
+        resizable_handle = self.element_is_present(self.locators.RESIZABLE_BOX_HANDLE)
+        self.go_to_element(resizable_handle)
+        self.action_drag_and_drop_by_offset(resizable_handle, 400, 200)
         max_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.RESIZABLE_BOX))
-        self.action_drag_and_drop_by_offset(self.element_is_present(self.locators.RESIZABLE_BOX_HANDLE),
-                                            -400, -200)
+        self.action_drag_and_drop_by_offset(resizable_handle, -400, -200)
         min_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.RESIZABLE_BOX))
         return max_size, min_size
 
     @allure.step('Change size resizable')
     def change_size_resizable(self):
-        self.action_drag_and_drop_by_offset(self.element_is_present(self.locators.RESIZABLE_HANDLE),
-                                            random.randint(1, 300), random.randint(1, 300))
+        resizable_handle = self.element_is_present(self.locators.RESIZABLE_HANDLE)
+        self.go_to_element(resizable_handle)
+        random_max_width = random.randint(1, 150)
+        random_max_height = random.randint(1, 100)
+        self.action_drag_and_drop_by_offset(resizable_handle, random_max_width, random_max_height)
         max_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.RESIZABLE))
-        self.action_drag_and_drop_by_offset(self.element_is_present(self.locators.RESIZABLE_BOX_HANDLE),
-                                            random.randint(-200, -1), random.randint(-200, -1))
+
+        random_min_width = random.randint(-200, -1)
+        random_min_height = random.randint(-200, -1)
+        self.action_drag_and_drop_by_offset(resizable_handle, random_min_width, random_min_height)
         min_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.RESIZABLE))
         return max_size, min_size
 
@@ -132,6 +137,7 @@ class DroppablePage(BasePage):
         self.action_drag_and_drop_to_element(drag_div, not_greedy_inner_box)
         text_not_greedy_box = self.element_is_visible(self.locators.NOT_GREEDY_DROP_BOX_TEXT).text
         text_not_greedy_inner_box = not_greedy_inner_box.text
+        self.go_to_element(self.element_is_present(self.locators.GREEDY_INNER_BOX))
         self.action_drag_and_drop_to_element(drag_div, greedy_inner_box)
         text_greedy_box = self.element_is_visible(self.locators.NOT_GREEDY_DROP_BOX_TEXT).text
         text_greedy_inner_box = not_greedy_inner_box.text

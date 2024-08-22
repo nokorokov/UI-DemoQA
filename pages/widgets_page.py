@@ -183,7 +183,9 @@ class ToolTipsPage(BasePage):
     def check_tool_tips(self):
         tool_tip_text_button = self.get_text_form_tool_tips(self.locators.HOVER_BUTTON, self.locators.BUTTON_TT)
         tool_tip_text_field = self.get_text_form_tool_tips(self.locators.TEXT_FIELD, self.locators.TEXT_FIELD_TT)
+        self.go_to_element(self.element_is_present(self.locators.CONTRARY_LINK))
         tool_tip_text_contrary = self.get_text_form_tool_tips(self.locators.CONTRARY_LINK, self.locators.CONTRARY_TT)
+        self.go_to_element(self.element_is_present(self.locators.SECTION_LINK))
         tool_tip_text_section = self.get_text_form_tool_tips(self.locators.SECTION_LINK, self.locators.SECTION_TT)
         return tool_tip_text_button, tool_tip_text_field, tool_tip_text_contrary, tool_tip_text_section
 

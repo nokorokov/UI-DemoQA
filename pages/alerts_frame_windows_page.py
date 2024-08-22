@@ -3,6 +3,8 @@ import time
 
 import allure
 from selenium.common import UnexpectedAlertPresentException
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 from pages.base_page import BasePage
 from locators.alerts_frame_windows_locators import (BrowserWindowsPageLocators, AlertsPageLocators, FramesPageLocators,
@@ -30,18 +32,17 @@ class AlertsPage(BasePage):
     def check_see_alert(self):
         self.element_is_visible(self.locators.SEE_ALERT_BUTTON).click()
         alert_window = self.switch_to_alert()
-        return alert_window.text
+        alert_text = alert_window.text
+        alert_window.accept()
+        return alert_text
 
     @allure.step('Check appear alert after 5 second and check alert text')
     def check_alert_appear_after_5_sec(self):
         self.element_is_visible(self.locators.APPEAR_AFTER_5_SEC_BUTTON).click()
-        time.sleep(5)
-        try:
-            alert_window = self.switch_to_alert()
-            return alert_window.text
-        except UnexpectedAlertPresentException:
-            alert_window = self.switch_to_alert()
-            return alert_window.text
+        alert_window = self.switch_to_alert()
+        alert_text = alert_window.text
+        alert_window.accept()
+        return alert_text
 
     @allure.step('Check accept and dismiss alert')
     def check_confirm_box_appear(self):
